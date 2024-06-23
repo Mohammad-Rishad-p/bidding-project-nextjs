@@ -1,4 +1,5 @@
 import HeaderInMain from "@/components/HeaderInMain";
+import ProductCard from "@/components/ProductCard";
 import SignUp from "@/components/SignUp";
 
 
@@ -7,10 +8,9 @@ export default function Home() {
     <main className="w-full h-screen" >
       {/* header */}
       <HeaderInMain />
-      <div>
         {/* sign up form */}
-        <SignUp />
-      </div>
+        {/* <SignUp /> */}
+        <ProductCard />
     </main>
   );
 }
