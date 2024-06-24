@@ -8,9 +8,8 @@ export default function Home() {
     <main className="w-full h-screen" >
       {/* header */}
       <HeaderInMain />
-        {/* sign up form */}
-        {/* <SignUp /> */}
-        <ProductCard />
+      <SignUp />
+      {/* <ProductCard /> */}
     </main>
   );
 }

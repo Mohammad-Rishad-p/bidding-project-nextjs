@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import Login from './Login'
 import { Checkbox, Label } from 'flowbite-react'
 import Link from 'next/link'
+import { Input } from './ui/input'
 
 
 function SignUp() {
@@ -18,18 +19,18 @@ function SignUp() {
             <form>
                 {/* first, lasn name */}
                 <div className='flex gap-5 items-center justify-center pb-4'>
-                    <input name='firstName' type='text' placeholder='First Name' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
-                    <input name='lirstName' type='text' placeholder='Lirst Name' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
+                    <Input id='firstName' name='firstName' type='text' placeholder='First Name' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
+                    <Input id='lastName' name='lirstName' type='text' placeholder='Lirst Name' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
                 </div>
                 {/* user name, password */}
                 <div className='flex gap-5 items-center justify-center pb-4'>
-                    <input name='userName' type='text' placeholder='username' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
-                    <input name='password' type='password' placeholder='password' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
+                    <Input id='userName' name='userName' type='text' placeholder='username' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
+                    <Input id='password' name='password' type='password' placeholder='password' className=' rounded-sm h-10 pl-7 w-60' required minLength={3} />
                 </div>
                 {/* email, phone nuber */}
                 <div className='flex gap-5 items-center justify-center pb-4'>
-                    <input name='email' type='text' placeholder='Enter email' className=' rounded-sm h-10 pl-7 w-60' required />
-                    <input name='phoneNumber' type='tel' placeholder='phone number' className=' rounded-sm h-10 pl-7 w-60' required minLength={10} maxLength={10} />
+                    <Input id='email' name='email' type='text' placeholder='Enter email' className=' rounded-sm h-10 pl-7 w-60' required />
+                    <Input id='password' name='phoneNumber' type='tel' placeholder='phone number' className=' rounded-sm h-10 pl-7 w-60' required minLength={10} maxLength={10} />
                 </div>
                 {/* checkbox, terms and policy */}
                 <div className='flex gap-3 items-center justify-center text-white pb-4'>
