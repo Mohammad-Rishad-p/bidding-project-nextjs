@@ -46,7 +46,8 @@ const addProductForm = () => {
       {/* auction date */}
       <div className="flex flex-col gap-2 mb-2">
         <label>Auction date</label>
-        <DatePicker />
+        <input type='datetime-local' />
+        {/* <DatePicker /> */}
       </div>
       {/* auction time */}
       <div className="flex flex-col gap-2 mb-2">

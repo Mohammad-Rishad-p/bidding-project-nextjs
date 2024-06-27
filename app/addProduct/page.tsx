@@ -2,7 +2,7 @@
 
 import AddProductForm from '@/components/AddProductForm'
 import Header from '@/components/Header'
-import PCard from '@/components/PCard'
+
 import ProductCard from '@/components/ProductCard'
 import React from 'react'
 
