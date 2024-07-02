@@ -4,6 +4,7 @@ import AddProductForm from '@/components/AddProductForm'
 import Header from '@/components/Header'
 
 import ProductCard from '@/components/ProductCard'
+import AddProductMongo from '@/components/addProductMongo'
 import React from 'react'
 
 const AddProduct = () => {
@@ -11,7 +12,8 @@ const AddProduct = () => {
     <main>
       <Header />
   
-      <AddProductForm />
+      {/* <AddProductForm /> */}
+      <AddProductMongo />
       <br/>
       <br />
       {/* <ProductCard /> */}

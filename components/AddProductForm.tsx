@@ -11,7 +11,7 @@ import { Input } from "./ui/input";
 
 const addProductForm = () => {
   return (
-    <div className="p-4 dark:bg-gray-800 bg-gray-300 w-[50%]">
+    <div className="p-4  w-[50%]">
      <form>
       {/* product name */}
       <div className="flex flex-col gap-2 mb-2">
@@ -56,8 +56,8 @@ const addProductForm = () => {
       </div>
       {/* product details */}
       {/* submit button */}
-      <div className="flex flex-col gap-2 mb-2">
-        <Button variant='outline' type="submit">Add Product</Button>
+      <div className="flex flex-col gap-2 mb-2 ">
+        <Button variant='outline'  type="submit">Add Product</Button>
       </div>
      </form>
     </div>

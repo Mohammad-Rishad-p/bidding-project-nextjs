@@ -9,7 +9,8 @@ export interface IProduct extends Document {
     minimumIncrease: number;
     auctionType: string;
     auctionDate: Date;
-    startingPrice: number; // Added startingPrice field
+    startingPrice: number;
+    productDescription: string; // Added startingPrice field
 };
 
 const productSchema: Schema = new mongoose.Schema({
@@ -42,6 +43,10 @@ const productSchema: Schema = new mongoose.Schema({
     },
     startingPrice: { // Added startingPrice field
         type: Number,
+        required: true
+    },
+    productDescription: {
+        type: String,
         required: true
     }
 });
