@@ -46,7 +46,7 @@ const SignUp: React.FC = () => {
     };
 
     return (
-        <div className='bg-slate-400 w-[40%] h-400 pb-4 text-black dark:text-white'>
+        <div className='bg-slate-400 w-[40%] h-400 pb-4 text-black dark:text-white  rounded-lg'>
             <div className='flex items-center flex-col pb-4'>
                 <h1 className='text-5xl pb-2'>Free Sign Up</h1>
                 <h5 className='text-sm'>Sign-up takes less than 30 seconds. Get 5 Free Credits on Joining.</h5>
