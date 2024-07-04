@@ -57,7 +57,7 @@ const UpcomingAuctions = () => {
             <Link href={`/products/${product._id}`}>{product.productName}</Link>
           </Card>
           <div className='flex flex-col h-[70%]'>
-            <div className='h-[20%] items-center flex justify-center'>MRP: {product.startingPrice}</div>
+            <div className='h-[20%] items-center flex justify-center'>Starting Price : {product.startingPrice}</div>
             <div className='h-[80%]'>
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>

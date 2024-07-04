@@ -90,7 +90,7 @@ const LiveAuctions = () => {
             <Link href={`/products/${product._id}`}>{product.productName}</Link>
           </Card>
           <div className='flex flex-col h-[60%]'>
-            <div className='h-[20%] items-center flex justify-center'>MRP: {product.startingPrice}</div>
+            <div className='h-[20%] items-center flex justify-center'>Starting Price : {product.startingPrice}</div>
             <div className='h-[80%]'>
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>
@@ -109,17 +109,16 @@ const LiveAuctions = () => {
             {/* after grey */}
             <div className=" w-full px-8 py-2">
               <Button variant='destructive' className=" bg-[#f7a040] w-full rounded-sm"
+              onClick={async () => {
+                const productId = product._id
+                await fetch(`/api/products/updateBid/${productId}`);
+              }}
               >bid</Button>
             </div>
           </Card>
         </Card>
       </div>
     ));
-  };
-
-  const handleBid = (productId: string) => {
-    console.log(`Bid on product with ID: ${productId}`);
-    // Implement your bid logic here
   };
 
   return (
