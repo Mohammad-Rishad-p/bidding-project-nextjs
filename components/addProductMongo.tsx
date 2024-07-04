@@ -92,7 +92,7 @@ const AddProductMongo = () => {
                         onChange={(e) => setProductName(e.target.value)}
                         className="h-10 pl-7 rounded-md"
                         required
-                        minLength={6}
+                        minLength={4}
                         maxLength={50}
                     />
                 </div>

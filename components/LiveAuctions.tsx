@@ -1,7 +1,12 @@
-"use client";
+"use client"
+
 import React, { useEffect, useState } from "react";
 import { Card } from './ui/card';
 import { Button } from "./ui/button";
+import Link from "next/link";
+import mongoose from "mongoose";
+import dbConnect from "@/libs/dbConnect";
+import Product from "@/models/product";
 
 type Product = {
   _id: string,
@@ -14,9 +19,10 @@ type Product = {
   auctionDate: string,
   startingPrice: number,
   productDescription: string,
+  currentBid: number,
 }
 
-export default function ProductCard() {
+const LiveAuctions = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [remainingTimes, setRemainingTimes] = useState<{ [key: string]: string }>({});
 
@@ -24,8 +30,12 @@ export default function ProductCard() {
     const fetchProducts = async () => {
       const res = await fetch('/api/products/getProducts');
       const products: Product[] = await res.json();
-      setProducts(products);
-      updateRemainingTimes(products);
+      const liveProducts = products.filter(product => {
+        const auctionDate = new Date(product.auctionDate);
+        return (auctionDate.getTime() - new Date().getTime()) <= 1000 * 60 * 60 * 24;
+      });
+      setProducts(liveProducts);
+      updateRemainingTimes(liveProducts);
     };
 
     fetchProducts();
@@ -44,15 +54,10 @@ export default function ProductCard() {
       const timeDifference = auctionDate.getTime() - currentDate.getTime();
 
       if (timeDifference > 0) {
-        if (timeDifference > 1000 * 60 * 60 * 24) {
-          const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-          acc[product._id] = `${days} days`;
-        } else {
-          const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-          acc[product._id] = `${hours} hours ${minutes} minutes ${seconds} seconds`;
-        }
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+        acc[product._id] = `${hours} : ${minutes} : ${seconds}`;
       } else {
         acc[product._id] = 'The auction has ended';
       }
@@ -73,48 +78,58 @@ export default function ProductCard() {
     return (auctionDate.getTime() - new Date().getTime()) <= 1000 * 60 * 60 * 24;
   });
 
-  const upcomingAuctions = filteredProducts.filter(product => {
-    const auctionDate = new Date(product.auctionDate);
-    return (auctionDate.getTime() - new Date().getTime()) > 1000 * 60 * 60 * 24;
-  });
-
   const renderProductCards = (products: Product[]) => {
-    return products.map((product, index) => (
-      <div className='w-[350px] h-[400px]' key={product._id}>
+    if (products.length === 0) {
+      return <p>No products available</p>;
+    }
+
+    return products.map((product) => (
+      <div className='w-[350px] h-[450px]' key={product._id}>
         <Card className='w-full h-full'>
-          {/* product title */}
           <Card className='h-[15%] flex items-center justify-center font-semibold'>
-            {product.productName}
+            <Link href={`/products/${product._id}`}>{product.productName}</Link>
           </Card>
-          {/* price, image */}
-          <div className='flex flex-col h-[70%]'>
-            {/* price */}
+          <div className='flex flex-col h-[60%]'>
             <div className='h-[20%] items-center flex justify-center'>MRP: {product.startingPrice}</div>
-            {/* image */}
             <div className='h-[80%]'>
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>
           </div>        
-          {/* card footer */}
-          <Card className='h-[15%] flex items-center justify-center'>
-            {remainingTimes[product._id] || 'Calculating...'}
+          <Card className='h-[25%] flex flex-col items-center justify-center'>
+            <div className=" flex justify-between w-full items-center px-6  bg-gray-400">
+              {/* grey part 1 */}
+            <div>{product.currentBid}</div>
+            {/* grey part2 */}
+            <div className=" flex flex-col">
+              <div>{remainingTimes[product._id] || 'Calculating...'}</div>
+              <div>waiting for bid</div>
+            </div>
+            
+            </div>
+            {/* after grey */}
+            <div className=" w-full px-8 py-2">
+              <Button variant='destructive' className=" bg-[#f7a040] w-full rounded-sm"
+              >bid</Button>
+            </div>
           </Card>
         </Card>
       </div>
     ));
   };
 
+  const handleBid = (productId: string) => {
+    console.log(`Bid on product with ID: ${productId}`);
+    // Implement your bid logic here
+  };
+
   return (
     <div className="mx-[10%] mt-[4%]">
       <h1>Live Auctions</h1>
       <div className="flex gap-8 m-4 flex-wrap">
-        {renderProductCards(liveAuctions)}
-        
-      </div>
-      <h1>Featured Upcoming Auctions</h1>
-      <div className="flex gap-8 m-4 flex-wrap">
-        {renderProductCards(upcomingAuctions)}
+        {liveAuctions.length > 0 ? renderProductCards(liveAuctions) : <p>No live auctions available</p>}
       </div>
     </div>
   );
-}
+};
+
+export default LiveAuctions;

@@ -1,12 +1,16 @@
 import Header from '@/components/Header'
-import ProductCard from '@/components/ProductCard'
+import LiveAuctions from '@/components/LiveAuctions'
+import UpcomingAuctions from '@/components/UpcomingAuctions'
+// import ProductCard from '@/components/ProductCard'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
         <Header />
-        <ProductCard />
+        <LiveAuctions />
+        <UpcomingAuctions />
+        {/* <ProductCard /> */}
     </div>
   )
 }

@@ -10,7 +10,8 @@ export interface IProduct extends Document {
     auctionType: string;
     auctionDate: Date;
     startingPrice: number;
-    productDescription: string; // Added startingPrice field
+    productDescription: string; // Added startingPrice field,
+    currentBid: number;
 };
 
 const productSchema: Schema = new mongoose.Schema({
@@ -47,6 +48,11 @@ const productSchema: Schema = new mongoose.Schema({
     },
     productDescription: {
         type: String,
+        required: true
+    },
+    currentBid: {
+        type: Number,
+        default: 0,
         required: true
     }
 });
