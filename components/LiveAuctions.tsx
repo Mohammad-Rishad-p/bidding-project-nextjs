@@ -77,6 +77,14 @@ const LiveAuctions = () => {
     const auctionDate = new Date(product.auctionDate);
     return (auctionDate.getTime() - new Date().getTime()) <= 1000 * 60 * 60 * 24;
   });
+  const performBid = async (productID: any) => {
+    try {
+        await fetch(`/api/products/updateBid/${productID}`);
+    } catch (error) {
+        //
+    }
+};
+
 
   const renderProductCards = (products: Product[]) => {
     if (products.length === 0) {
@@ -109,10 +117,11 @@ const LiveAuctions = () => {
             {/* after grey */}
             <div className=" w-full px-8 py-2">
               <Button variant='destructive' className=" bg-[#f7a040] w-full rounded-sm"
-              onClick={async () => {
-                const productId = product._id
-                await fetch(`/api/products/updateBid/${productId}`);
-              }}
+              // onClick={async () => {
+              //   const productId = product._id
+              //   await fetch(`/api/products/updateBid/${productId}`);
+              // }}
+              onClick={async() => await fetch(`/api/products/updateBid/${product._id}`)}
               >bid</Button>
             </div>
           </Card>

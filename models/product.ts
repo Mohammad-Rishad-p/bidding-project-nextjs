@@ -58,7 +58,7 @@ const productSchema: Schema = new mongoose.Schema({
     },
     bidWinner:{
         type: String,
-        default: "",
+        default: " ",
         required: true
     }
 });
