@@ -4,7 +4,7 @@ import HeaderInMain from "@/components/HeaderInMain";
 import MyForm from "@/components/MyForm";
 import ProductCard from "@/components/ProductCard";
 import SignUp from "@/components/SignUp";
-import SignUpMongo from "@/components/signUpMongo";
+import SignUpMongo from "@/components/SignUpMongo";
 
 
 export default function Home() {
