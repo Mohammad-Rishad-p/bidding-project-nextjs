@@ -4,6 +4,7 @@ import HeaderInMain from "@/components/HeaderInMain";
 import MyForm from "@/components/MyForm";
 import ProductCard from "@/components/ProductCard";
 import SignUp from "@/components/SignUp";
+import SignUpMongo from "@/components/signUpMongo";
 
 
 export default function Home() {
@@ -11,10 +12,7 @@ export default function Home() {
     <main className="w-full h-screen" >
       {/* header */}
       <HeaderInMain />
-      {/* <MyForm /> */}
-      <SignUp />
-      {/* <AddProductDescription/> */}
-      {/* <ProductCard /> */}
+      <SignUpMongo />
     </main>
   );
 }

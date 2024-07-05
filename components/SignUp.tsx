@@ -12,6 +12,8 @@ interface FormData {
     password: string,
     email: string,
     phoneNumber?: number,
+    aadhar?: number,
+    pan?: number
 }
 
 const SignUp: React.FC = () => {
@@ -42,6 +44,8 @@ const SignUp: React.FC = () => {
         const password = formData.password;
         const email = formData.email;
         const phoneNumber = formData.phoneNumber;
+        const aadhar = formData.aadhar;
+        const pan = formData.aadhar;
         
     };
 
