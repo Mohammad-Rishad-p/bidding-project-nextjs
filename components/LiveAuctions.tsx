@@ -20,14 +20,19 @@ type Product = {
   startingPrice: number,
   productDescription: string,
   currentBid: number,
+  bidWinner: string,
 }
 
 const LiveAuctions = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [remainingTimes, setRemainingTimes] = useState<{ [key: string]: string }>({});
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const fetchProducts = async () => {
+      const params = new URLSearchParams(window.location.search);
+      setUserName(params.get('userName') || "");
+      // console.log(userName);
       const res = await fetch('/api/products/getProducts');
       const products: Product[] = await res.json();
       const liveProducts = products.filter(product => {
@@ -77,11 +82,21 @@ const LiveAuctions = () => {
     const auctionDate = new Date(product.auctionDate);
     return (auctionDate.getTime() - new Date().getTime()) <= 1000 * 60 * 60 * 24;
   });
-  const performBid = async (productID: any) => {
+  const performBid = async (productID: any, userName: any) => {
     try {
-        await fetch(`/api/products/updateBid/${productID}`);
-    } catch (error) {
-        //
+      const uName = { userName };
+        const res = await fetch(`/api/products/updateBid/${productID}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(uName),
+        });
+        if(res.ok) {
+          setUserName(userName);
+        }
+    } catch (error: any) {
+      alert(`Error: ${error.message}`);
     }
 };
 
@@ -106,7 +121,10 @@ const LiveAuctions = () => {
           <Card className='h-[25%] flex flex-col items-center justify-center'>
             <div className=" flex justify-between w-full items-center px-6  bg-gray-400">
               {/* grey part 1 */}
-            <div>{product.currentBid}</div>
+            <div className="flex flex-col">
+              <div>{product.currentBid}</div>
+              <div>{product.bidWinner}</div>
+            </div>
             {/* grey part2 */}
             <div className=" flex flex-col">
               <div>{remainingTimes[product._id] || 'Calculating...'}</div>
@@ -121,7 +139,7 @@ const LiveAuctions = () => {
               //   const productId = product._id
               //   await fetch(`/api/products/updateBid/${productId}`);
               // }}
-              onClick={async() => await fetch(`/api/products/updateBid/${product._id}`)}
+              onClick={async() => performBid(product._id, userName)}
               >bid</Button>
             </div>
           </Card>

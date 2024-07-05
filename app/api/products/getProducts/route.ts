@@ -5,10 +5,10 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
         await dbConnect();
-        console.log("connected to database");
+        // console.log("connected to database");
 
         const products = await Product.find({});
-        console.log("fetched product successfully");
+        // console.log("fetched product successfully");
 
         if (products.length === 0) {
             console.log("no products found");

@@ -38,7 +38,7 @@ const LoginMongo = () => {
                 alert("login successful");
                 setUserName("");
                 setPassword("");
-                window.location.href = "/products/getProducts";
+                window.location.href = `/products/getProducts?userName=${encodeURIComponent(userName)}`; // Pass userName as a query parameter
             }
         } catch (error: any) {
             alert(`Error: ${error.message}`);

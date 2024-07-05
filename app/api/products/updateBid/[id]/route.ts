@@ -2,10 +2,9 @@ import dbConnect from "@/libs/dbConnect";
 import Product from "@/models/product";
 import { NextResponse } from "next/server";
 
-export async function GET(request: any) {
+export async function POST(request: any) {
     try {
-        
-        //Uncomment the following lines when you're ready to connect to the database and fetch data
+        const {userName} = await request.json();
         await dbConnect();
         console.log("connected to db in live auction");
         const url = new URL(request.url);
@@ -15,12 +14,12 @@ export async function GET(request: any) {
         const product = await Product.findById(productId);
         console.log("product fetched successfully");
 
-        //Example: handle product retrieval and modification
         if (!product) {
             console.log("No product found in the database.");
             return NextResponse.json({ message: "No product found with the given _id." });
         }
         product.currentBid = product.currentBid + product.minimumIncrease
+        product.bidWinner = userName
         await product.save();
 
         return NextResponse.json(product);
