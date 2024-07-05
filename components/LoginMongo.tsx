@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Input } from './ui/input';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
 const LoginMongo = () => {
     type User = {
@@ -37,6 +38,7 @@ const LoginMongo = () => {
                 alert("login successful");
                 setUserName("");
                 setPassword("");
+                window.location.href = "/products/getProducts";
             }
         } catch (error: any) {
             alert(`Error: ${error.message}`);
