@@ -1,4 +1,5 @@
 "use client"
+import Header from '@/components/Header';
 import React, { useEffect, useState } from 'react'
 
 const Page = () => {
@@ -33,6 +34,9 @@ const Page = () => {
   }, []);
 
   return (
+    <>
+    <div>
+      <Header />
     <div>
       {product && (
         // for image and auction information box
@@ -49,6 +53,8 @@ const Page = () => {
         </div>
       )}
     </div>
+    </div>
+    </>
   )
 }
 

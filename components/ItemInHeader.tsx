@@ -1,17 +1,22 @@
-import React from 'react'
+import React from 'react';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
-type Props ={
-    text: string,
-    
+type Props = {
+    text: string;
+    link: string;
 };
 
-function ItemInHeader({text}: Props) {
-  return (
-    <div>
-        <Button variant='secondary'> {text}</Button>
-    </div>
-  )
+function ItemInHeader({ text, link }: Props) {
+    return (
+        <div>
+            <Link href={link}>
+                
+                    <Button variant='secondary'>{text}</Button>
+                
+            </Link>
+        </div>
+    );
 }
 
-export default ItemInHeader
+export default ItemInHeader;
