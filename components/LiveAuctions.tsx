@@ -1,12 +1,9 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { Card } from './ui/card';
 import { Button } from "./ui/button";
 import Link from "next/link";
-import mongoose from "mongoose";
-import dbConnect from "@/libs/dbConnect";
-import Product from "@/models/product";
 
 type Product = {
   _id: string,
@@ -32,12 +29,13 @@ const LiveAuctions = () => {
     const fetchProducts = async () => {
       const params = new URLSearchParams(window.location.search);
       setUserName(params.get('userName') || "");
-      // console.log(userName);
       const res = await fetch('/api/products/getProducts');
       const products: Product[] = await res.json();
       const liveProducts = products.filter(product => {
         const auctionDate = new Date(product.auctionDate);
-        return (auctionDate.getTime() - new Date().getTime()) <= 1000 * 60 * 60 * 24;
+        const currentDate = new Date();
+        const oneDayBeforeCurrent = new Date(currentDate.getTime() - (1000 * 60 * 60 * 24));
+        return auctionDate.getTime() <= currentDate.getTime() && auctionDate.getTime() > oneDayBeforeCurrent.getTime();
       });
       setProducts(liveProducts);
       updateRemainingTimes(liveProducts);
@@ -54,9 +52,11 @@ const LiveAuctions = () => {
 
   const updateRemainingTimes = (products: Product[]) => {
     const currentDate = new Date();
+    const oneDayBeforeCurrent = new Date(currentDate.getTime() - (1000 * 60 * 60 * 24));
+    
     const newRemainingTimes = products.reduce((acc, product) => {
       const auctionDate = new Date(product.auctionDate);
-      const timeDifference = auctionDate.getTime() - currentDate.getTime();
+      const timeDifference = auctionDate.getTime() - oneDayBeforeCurrent.getTime();
 
       if (timeDifference > 0) {
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -73,35 +73,25 @@ const LiveAuctions = () => {
     setRemainingTimes(newRemainingTimes);
   };
 
-  const filteredProducts = products.filter(product => {
-    const auctionDate = new Date(product.auctionDate);
-    return auctionDate.getTime() > new Date().getTime();
-  });
-
-  const liveAuctions = filteredProducts.filter(product => {
-    const auctionDate = new Date(product.auctionDate);
-    return (auctionDate.getTime() - new Date().getTime()) <= 1000 * 60 * 60 * 24;
-  });
   const performBid = async (productID: any, userName: any) => {
     try {
       const uName = { userName };
-        const res = await fetch(`/api/products/updateBid/${productID}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(uName),
-        });
-        if(res.ok) {
-          setUserName(userName);
-        }
+      const res = await fetch(`/api/products/updateBid/${productID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(uName),
+      });
+      if(res.ok) {
+        setUserName(userName);
+      }
     } catch (error: any) {
       alert(`Error: ${error.message}`);
     }
-};
+  };
 
-
-  const renderProductCards = (products: Product[]) => {
+  const renderProductCards = () => {
     if (products.length === 0) {
       return <p>No products available</p>;
     }
@@ -152,7 +142,7 @@ const LiveAuctions = () => {
     <div className="mx-[10%] mt-[4%]">
       <h1>Live Auctions</h1>
       <div className="flex gap-8 m-4 flex-wrap">
-        {liveAuctions.length > 0 ? renderProductCards(liveAuctions) : <p>No live auctions available</p>}
+        {renderProductCards()}
       </div>
     </div>
   );

@@ -22,16 +22,44 @@ const PastAuctions = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch('/api/products/getProducts');
-      const products: Product[] = await res.json();
-      setProducts(products.filter(product => {
-        const auctionDate = new Date(product.auctionDate);
-        return (auctionDate.getTime() - new Date().getTime()) < 0;
-      }));
+      try {
+        const res = await fetch('/api/products/getProducts');
+        const products: Product[] = await res.json();
+        const pastProducts = products.filter(product => {
+          const auctionDate = new Date(product.auctionDate);
+          const oneDayBefore = new Date();
+          oneDayBefore.setDate(oneDayBefore.getDate() - 1); // One day before current date
+          return auctionDate.getTime() < oneDayBefore.getTime();
+        });
+        setProducts(pastProducts);
+      } catch (error) {
+        console.error("Failed to fetch past products:", error);
+      }
     };
 
     fetchProducts();
   }, []);
+
+  const renderRemainingTime = (auctionDate: string) => {
+    const currentDate = new Date();
+    const auctionEndDate = new Date(auctionDate);
+    const timeDifference = auctionEndDate.getTime() - currentDate.getTime();
+
+    if (timeDifference <= 0) {
+      return "Auction ended";
+    } else {
+      const seconds = Math.floor((timeDifference / 1000) % 60);
+      const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+      const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      
+      if (days > 0) {
+        return `${days} day${days > 1 ? 's' : ''} ago`;
+      } else {
+        return `${hours}h ${minutes}m ${seconds}s ago`;
+      }
+    }
+  };
 
   const renderProductCards = (products: Product[]) => {
     if (products.length === 0) {
@@ -41,24 +69,21 @@ const PastAuctions = () => {
     return products.map((product) => (
       <div className='w-[350px] h-[400px]' key={product._id}>
         <Card className='w-full h-full'>
-        {/* product name */}
           <Card className='h-[15%] flex items-center justify-center font-semibold'>
             <Link href={`/products/${product._id}`}>{product.productName}</Link>
           </Card>
           <div className='flex flex-col h-[70%]'>
-            {/* product price */}
             <div className='h-[20%] items-center flex justify-center'>Starting Price : {product.startingPrice}</div>
             <div className='h-[80%]'>
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>
-            <div className=" flex justify-between px-3">
-                <p>Bid Winner</p>
-                <p>{product.bidWinner}</p>
+            <div className="flex justify-between px-3">
+              <p>Bid Winner</p>
+              <p>{product.bidWinner}</p>
             </div>
-          </div>   
-              
+          </div>
           <Card className='h-[15%] flex items-center justify-center'>
-            Auction ended
+            {renderRemainingTime(product.auctionDate)}
           </Card>
         </Card>
       </div>
@@ -67,7 +92,7 @@ const PastAuctions = () => {
 
   return (
     <div className="mx-[10%] mt-[4%]">
-      <h1>Featured Past Auctions</h1>
+      <h1>closed Auctions</h1>
       <div className="flex gap-8 m-4 flex-wrap">
         {renderProductCards(products)}
       </div>

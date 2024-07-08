@@ -13,6 +13,7 @@ export interface IProduct extends Document {
     productDescription: string; // Added startingPrice field,
     currentBid: number;
     bidWinner: string;
+    delivery: string;
 };
 
 const productSchema: Schema = new mongoose.Schema({
@@ -59,6 +60,10 @@ const productSchema: Schema = new mongoose.Schema({
     bidWinner:{
         type: String,
         default: " ",
+        required: true
+    },
+    delivery:{
+        type: String,
         required: true
     }
 });

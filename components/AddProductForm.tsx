@@ -33,6 +33,13 @@ const addProductForm = () => {
         <label>bid reset time in seconds</label>
         <Input type="number" placeholder="enter bid reset time in seconds" name="bidResetTime" className=" h-10 pl-7 rounded-md" required  />
       </div>
+
+      {/* bid reset time */}
+      <div className="flex flex-col gap-2 mb-2">
+        <label>delivery information</label>
+        <Input type="enter delivery information" placeholder="enter bid reset time in seconds" name="bidResetTime" className=" h-10 pl-7 rounded-md" required  />
+      </div>
+
       {/* minimum increase */}
       <div className="flex flex-col gap-2 mb-2">
         <label>Minimum increase per bid in seconds</label>

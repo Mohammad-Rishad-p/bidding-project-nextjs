@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Card } from './ui/card';
 import Link from "next/link";
 
+// Define the Product type
 type Product = {
   _id: string,
   productName: string,
@@ -16,28 +17,37 @@ type Product = {
   productDescription: string,
 }
 
+// UpcomingAuctions component
 const UpcomingAuctions = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    // Fetch products from API
     const fetchProducts = async () => {
       const res = await fetch('/api/products/getProducts');
       const products: Product[] = await res.json();
-      setProducts(products.filter(product => {
+      
+      // Filter products to show only upcoming auctions
+      const upcomingProducts = products.filter(product => {
         const auctionDate = new Date(product.auctionDate);
-        return (auctionDate.getTime() - new Date().getTime()) > 1000 * 60 * 60 * 24;
-      }));
+        const oneDayBeforeNow = new Date().getTime() - (1000 * 60 * 60 * 24);
+        return auctionDate.getTime() > oneDayBeforeNow;
+      });
+      
+      setProducts(upcomingProducts);
     };
 
     fetchProducts();
   }, []);
 
+  // Function to calculate remaining time until auction starts
   const calculateRemainingTime = (auctionDate: string) => {
     const now = new Date().getTime();
+    const oneDayBeforeNow = now - (1000 * 60 * 60 * 24);
     const auctionStartTime = new Date(auctionDate).getTime();
-    const timeDifference = auctionStartTime - now;
-
+    
     // Calculate remaining time
+    const timeDifference = auctionStartTime - oneDayBeforeNow;
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
@@ -45,6 +55,7 @@ const UpcomingAuctions = () => {
     return `${days} days`;
   };
 
+  // Function to render product cards
   const renderProductCards = (products: Product[]) => {
     if (products.length === 0) {
       return <p>No products available</p>;
@@ -63,7 +74,7 @@ const UpcomingAuctions = () => {
             </div>
           </div>        
           <Card className='h-[15%] flex items-center justify-center'>
-            open after {calculateRemainingTime(product.auctionDate)}
+            Opens in {calculateRemainingTime(product.auctionDate)}
           </Card>
         </Card>
       </div>

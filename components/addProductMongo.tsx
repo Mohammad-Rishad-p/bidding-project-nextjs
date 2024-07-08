@@ -13,6 +13,7 @@ const AddProductMongo = () => {
         auctionDate: string; // Changed to string
         startingPrice: number;
         productDescription: string;
+        delivery: string
     };
 
     const [productName, setProductName] = useState("");
@@ -24,6 +25,7 @@ const AddProductMongo = () => {
     const [auctionDate, setAuctionDate] = useState("");
     const [startingPrice, setStartingPrice] = useState<number | "">("");
     const [productDescription, setProductDescription] = useState("");
+    const [delivery, setDelivery] = useState("");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -51,7 +53,8 @@ const AddProductMongo = () => {
             bidResetTime: Number(bidResetTime),
             startingPrice: Number(startingPrice), 
             productDescription, 
-            auctionDate 
+            auctionDate, 
+            delivery,
         };
 
         const res = await fetch('/api/products/addProducts', {
@@ -73,6 +76,7 @@ const AddProductMongo = () => {
             setStartingPrice("");
             setProductDescription("");
             setAuctionDate("");
+            setDelivery("");
         } else {
             const errorData = await res.json();
             alert(`Error: ${errorData.error}`);
@@ -162,6 +166,18 @@ const AddProductMongo = () => {
                         placeholder="Enter auction type"
                         value={auctionType}
                         onChange={(e) => setAuctionType(e.target.value)}
+                        className="h-10 pl-7 rounded-md"
+                        required
+                    />
+                </div>
+                {/* delivery information */}
+                <div className="flex flex-col gap-2 mb-2">
+                    <label>Delivery Information</label>
+                    <input
+                        type="text"
+                        placeholder="Enter auction type"
+                        value={delivery}
+                        onChange={(e) => setDelivery(e.target.value)}
                         className="h-10 pl-7 rounded-md"
                         required
                     />
