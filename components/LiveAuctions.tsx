@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Card } from './ui/card';
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -50,7 +50,7 @@ const LiveAuctions = () => {
     return () => clearInterval(intervalId);
   }, [products]);
 
-  const updateRemainingTimes = (products: Product[]) => {
+  const updateRemainingTimes = useCallback((products: Product[]) => {
     const currentDate = new Date();
     const oneDayBeforeCurrent = new Date(currentDate.getTime() - (1000 * 60 * 60 * 24));
     
@@ -71,7 +71,7 @@ const LiveAuctions = () => {
     }, {} as { [key: string]: string });
 
     setRemainingTimes(newRemainingTimes);
-  };
+  }, []);
 
   const performBid = async (productID: any, userName: any) => {
     try {
@@ -84,7 +84,9 @@ const LiveAuctions = () => {
         body: JSON.stringify(uName),
       });
       if(res.ok) {
-        setUserName(userName);
+        // Update the local state or re-fetch products to reflect the new bid
+        const updatedProducts = await fetch('/api/products/getProducts');
+        setProducts(await updatedProducts.json());
       }
     } catch (error: any) {
       alert(`Error: ${error.message}`);
@@ -99,7 +101,7 @@ const LiveAuctions = () => {
     return products.map((product) => (
       <div className='w-[350px] h-[450px]' key={product._id}>
         <Card className='w-full h-full'>
-          <Card className='h-[15%] flex items-center justify-center font-semibold'>
+          <Card className='h-[15%] flex items-center justify-center font-semibold pl-5'>
             <Link href={`/products/${product._id}`}>{product.productName}</Link>
           </Card>
           <div className='flex flex-col h-[60%]'>
@@ -110,25 +112,17 @@ const LiveAuctions = () => {
           </div>        
           <Card className='h-[25%] flex flex-col items-center justify-center'>
             <div className=" flex justify-between w-full items-center px-6  bg-gray-400">
-              {/* grey part 1 */}
-            <div className="flex flex-col">
-              <div>{product.currentBid}</div>
-              <div>{product.bidWinner}</div>
+              <div className="flex flex-col">
+                <div>{product.currentBid}</div>
+                <div>{product.bidWinner}</div>
+              </div>
+              <div className=" flex flex-col">
+                <div>{remainingTimes[product._id] || 'Calculating...'}</div>
+                <div>waiting for bid</div>
+              </div>
             </div>
-            {/* grey part2 */}
-            <div className=" flex flex-col">
-              <div>{remainingTimes[product._id] || 'Calculating...'}</div>
-              <div>waiting for bid</div>
-            </div>
-            
-            </div>
-            {/* after grey */}
             <div className=" w-full px-8 py-2">
               <Button variant='destructive' className=" bg-[#f7a040] w-full rounded-sm"
-              // onClick={async () => {
-              //   const productId = product._id
-              //   await fetch(`/api/products/updateBid/${productId}`);
-              // }}
               onClick={async() => performBid(product._id, userName)}
               >bid</Button>
             </div>
@@ -139,8 +133,8 @@ const LiveAuctions = () => {
   };
 
   return (
-    <div className="mx-[10%] mt-[4%]">
-      <h1>Live Auctions</h1>
+    <div className=" mt-[4%] w-full">
+      <h1 className=" text-5xl mb-12 items-center justify-center flex">Live Auctions</h1>
       <div className="flex gap-8 m-4 flex-wrap">
         {renderProductCards()}
       </div>

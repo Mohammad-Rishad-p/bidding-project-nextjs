@@ -148,7 +148,7 @@ const ProductIDClick = () => {
               <p className='text-6xl'>{product.productName}</p>
               <div className='flex gap-8'>
                 {/* part 2 bid + remaining time */}
-                <div className='w-[270px] bg-slate-200 p-6 text-4xl items-center justify-center h-[150px] flex'>
+                <div className='w-[270px] bg-slate-200 p-6 text-2xl items-center justify-center h-[150px] flex'>
                   {remainingTime}
                 </div>
                 {/* bid + price */}
@@ -177,8 +177,8 @@ const ProductIDClick = () => {
               </div>
               {/* part 3 table */}
               <div>
-                <div className='bg-slate-200 px-8 flex-wrap py-8'>
-                  <table className='w-[500px]'>
+                <div className=' px-8 flex-wrap py-8 bg-slate-200 w-[600px]'>
+                  <table className='w-[500px] '>
                     {/* product/auction Id */}
                     <tr className='flex justify-between border-black border-b-[0.4px] mb-1'>
                       <td>Auction Id</td>

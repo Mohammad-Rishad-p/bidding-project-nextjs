@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import LiveAuctions from '@/components/LiveAuctions'
 import PastAuctions from '@/components/PastAuctions'
@@ -8,12 +9,15 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>
+    <div className=' flex flex-col gap-12'>
         
         <Header />
+        <div className=' px-[10%]'>
         <LiveAuctions />
         <UpcomingAuctions />
         <PastAuctions />
+        </div>
+        <Footer />
         {/* <ProductCard /> */}
       
     </div>

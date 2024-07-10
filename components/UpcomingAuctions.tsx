@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { Card } from './ui/card';
 import Link from "next/link";
@@ -27,11 +28,11 @@ const UpcomingAuctions = () => {
       const res = await fetch('/api/products/getProducts');
       const products: Product[] = await res.json();
       
-      // Filter products to show only upcoming auctions
+      // Filter products to show only upcoming auctions that are not live
       const upcomingProducts = products.filter(product => {
         const auctionDate = new Date(product.auctionDate);
-        const oneDayBeforeNow = new Date().getTime() - (1000 * 60 * 60 * 24);
-        return auctionDate.getTime() > oneDayBeforeNow;
+        const currentDate = new Date();
+        return auctionDate > currentDate; // Show only products with auction dates in the future
       });
       
       setProducts(upcomingProducts);
@@ -43,16 +44,20 @@ const UpcomingAuctions = () => {
   // Function to calculate remaining time until auction starts
   const calculateRemainingTime = (auctionDate: string) => {
     const now = new Date().getTime();
-    const oneDayBeforeNow = now - (1000 * 60 * 60 * 24);
     const auctionStartTime = new Date(auctionDate).getTime();
     
     // Calculate remaining time
-    const timeDifference = auctionStartTime - oneDayBeforeNow;
+    const timeDifference = auctionStartTime - now;
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-    return `${days} days`;
+    if (days > 0) {
+      return `${days} days`;
+    }
+    
+    return `${hours} hours ${minutes} minutes ${seconds} seconds`;
   };
 
   // Function to render product cards
@@ -61,10 +66,10 @@ const UpcomingAuctions = () => {
       return <p>No products available</p>;
     }
 
-    return products.map((product, index) => (
+    return products.map((product) => (
       <div className='w-[350px] h-[400px]' key={product._id}>
         <Card className='w-full h-full'>
-          <Card className='h-[15%] flex items-center justify-center font-semibold'>
+          <Card className='h-[15%] flex items-center justify-center font-semibold pl-5'>
             <Link href={`/products/${product._id}`}>{product.productName}</Link>
           </Card>
           <div className='flex flex-col h-[70%]'>
@@ -74,7 +79,7 @@ const UpcomingAuctions = () => {
             </div>
           </div>        
           <Card className='h-[15%] flex items-center justify-center'>
-            Opens in {calculateRemainingTime(product.auctionDate)}
+            Starts in {calculateRemainingTime(product.auctionDate)}
           </Card>
         </Card>
       </div>
@@ -82,8 +87,8 @@ const UpcomingAuctions = () => {
   };
 
   return (
-    <div className="mx-[10%] mt-[4%]">
-      <h1>Featured Upcoming Auctions</h1>
+    <div className=" mt-[4%]">
+      <h1 className=" text-5xl mb-12 items-center justify-center flex">Featured Upcoming Auctions</h1>
       <div className="flex gap-8 m-4 flex-wrap">
         {renderProductCards(products)}
       </div>

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { Button } from './ui/button';
 
 const AddProductMongo = () => {
     type Product = {
@@ -84,7 +85,7 @@ const AddProductMongo = () => {
     };
 
     return (
-        <div className="p-4 dark:bg-gray-800 bg-gray-300 w-[50%]">
+        <div className="p-4 dark:bg-gray-800 bg-slate-300 w-[50%]">
             <form onSubmit={handleSubmit}>
                 {/* product name */}
                 <div className="flex flex-col gap-2 mb-2">
@@ -204,10 +205,10 @@ const AddProductMongo = () => {
                     />
                 </div>
                 {/* submit button */}
-                <div className="flex flex-col gap-2 mb-2">
-                    <button type="submit" className="btn btn-outline">
+                <div className="flex flex-col gap-2 mb-2 mt-6 w-full flex items-center justify-center ">
+                    <Button type="submit" className="btn btn-outline  bg-white text-black w-60 py-4 " variant='secondary'>
                         Add Product
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>
