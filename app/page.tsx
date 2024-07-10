@@ -1,6 +1,7 @@
 "use client"
 import Footer from "@/components/Footer";
 import HeaderInMain from "@/components/HeaderInMain";
+import LiveAuctionNew from "@/components/LiveAuctionNew";
 import LiveAuctions from "@/components/LiveAuctions";
 import PastAuctions from "@/components/PastAuctions";
 import SignUpMongo from "@/components/SignUpMongo";
@@ -18,7 +19,8 @@ export default function Home() {
       </div>
       </div>
       <div className=' px-[10%]'>
-        <LiveAuctions />
+        {/* <LiveAuctions /> */}
+        <LiveAuctionNew />
         <UpcomingAuctions />
         <PastAuctions />
         </div>

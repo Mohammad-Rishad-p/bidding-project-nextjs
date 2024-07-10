@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import LiveAuctionNew from '@/components/LiveAuctionNew'
 import LiveAuctions from '@/components/LiveAuctions'
 import PastAuctions from '@/components/PastAuctions'
 import UpcomingAuctions from '@/components/UpcomingAuctions'
@@ -13,7 +14,8 @@ const page = () => {
         
         <Header />
         <div className=' px-[10%]'>
-        <LiveAuctions />
+        {/* <LiveAuctions /> */}
+        <LiveAuctionNew />
         <UpcomingAuctions />
         <PastAuctions />
         </div>
