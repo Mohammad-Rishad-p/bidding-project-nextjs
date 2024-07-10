@@ -6,6 +6,7 @@ import LiveAuctions from "@/components/LiveAuctions";
 import PastAuctions from "@/components/PastAuctions";
 import SignUpMongo from "@/components/SignUpMongo";
 import UpcomingAuctions from "@/components/UpcomingAuctions";
+import UpcomingAuctionsAdmin from "@/components/UpcomingAuctionsAdmin";
 
 
 export default function Home() {
@@ -13,13 +14,13 @@ export default function Home() {
     <main className="w-full h-screen flex flex-col gap-12" >
       {/* header */}
       <HeaderInMain />
+      <UpcomingAuctionsAdmin />
       <div className=" w-full">
         <div className=" w-full h-screen ml-[40%] mt-[4%]">
-          <SignUpMongo />
+          {/* <SignUpMongo /> */}
         </div>
       </div>
       <div className=' px-[10%]'>
-        {/* <LiveAuctions /> */}
         <LiveAuctionNew />
         <UpcomingAuctions />
         <PastAuctions />

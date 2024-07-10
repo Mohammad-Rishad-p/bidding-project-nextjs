@@ -48,10 +48,10 @@ const PastAuctions = () => {
           <p>No products available</p>
         ) : (
           products.map((product) => (
-            <div className='w-[350px] h-[400px]' key={product._id}>
+            <div className='w-[350px] h-[400px] text-[#404d63]' key={product._id}>
               <Card className='w-full h-full'>
-                <Card className='h-[15%] flex items-center justify-center font-semibold pl-5'>
-                  <Link href={`/products/${product._id}`}>{product.productName}</Link>
+                <Card className='h-[15%] flex items-center justify-center pl-5'>
+                  <Link href={`/products/${product._id}`} className="hover:text-[#f7a040] ">{product.productName}</Link>
                 </Card>
                 <div className='flex flex-col h-[70%]'>
                   <div className='h-[20%] items-center flex justify-center'>Starting Price : {product.startingPrice}</div>

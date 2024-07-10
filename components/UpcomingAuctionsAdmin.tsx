@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from './ui/card';
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 // Define the Product type
 type Product = {
@@ -19,7 +20,7 @@ type Product = {
 }
 
 // UpcomingAuctions component
-const UpcomingAuctions = () => {
+const UpcomingAuctionsAdmin = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -72,14 +73,33 @@ const UpcomingAuctions = () => {
           <Card className='h-[15%] flex items-center justify-center pl-5'>
             <Link href={`/products/${product._id}`} className= "hover:text-[#f7a040] ">{product.productName}</Link>
           </Card>
-          <div className='flex flex-col h-[70%]'>
+          <div className='flex flex-col h-[60%]'>
             <div className='h-[20%] items-center flex justify-center'>Starting Price : {product.startingPrice}</div>
             <div className='h-[80%]'>
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>
           </div>
-          <Card className='h-[15%] flex items-center justify-center'>
-            Starts in {calculateRemainingTime(product.auctionDate)}
+          <Card className='h-[25%] flex flex-col items-center justify-center'>
+           <h1 className=" pb-1 border-black border-b-[0.25px] w-full flex items-center justify-center"> Starts in {calculateRemainingTime(product.auctionDate)}</h1>
+           <div className=" w-full pt-2 items-center justify-center gap-12 flex">
+            {/* edit button */}
+            {/* <Button variant='secondary' className="w-[40%] bg-orange-400">delete</Button> */}
+            {/* delete button  */}
+            <Button variant='destructive' className="w-[40%]"
+            onClick={async () => {
+              const res = await fetch(`/api/products/deleteProduct/${product._id}`, {
+                method: 'DELETE',
+              });
+              if (res.ok) {
+                // Remove the deleted product from the state to update the UI
+                setProducts(products.filter(p => p._id !== product._id));
+              } else {
+                const errorData = await res.json();
+                alert(`Failed to delete product: ${errorData.message}`);
+              }
+            }}
+            >delete</Button>
+           </div>
           </Card>
         </Card>
       </div>
@@ -96,4 +116,4 @@ const UpcomingAuctions = () => {
   );
 };
 
-export default UpcomingAuctions;
+export default UpcomingAuctionsAdmin;

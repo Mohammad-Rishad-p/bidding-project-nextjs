@@ -77,7 +77,7 @@ const LiveAuctionNew = () => {
 
   const performBid = async (productID: string, userName: string) => {
     if (!userName) {
-      alert("Please log in to bid.");
+      alert("Please login to bid.");
       return;
     }
     try {
@@ -103,10 +103,10 @@ const LiveAuctionNew = () => {
     }
 
     return products.map((product) => (
-      <div className='w-[350px] h-[450px]' key={product._id}>
+      <div className='w-[350px] h-[450px] text-[#404d63]' key={product._id}>
         <Card className='w-full h-full'>
-          <Card className='h-[15%] flex items-center justify-center font-semibold'>
-            <Link href={`/products/${product._id}`}>{product.productName}</Link>
+          <Card className='h-[15%] flex items-center justify-center'>
+            <Link href={`/products/${product._id}`} className="hover:text-[#f7a040] ">{product.productName}</Link>
           </Card>
           <div className='flex flex-col h-[60%]'>
             <div className='h-[20%] items-center flex justify-center'>Starting Price : {product.startingPrice}</div>
@@ -117,7 +117,7 @@ const LiveAuctionNew = () => {
           <Card className='h-[25%] flex flex-col items-center justify-center'>
             <div className=" flex justify-between w-full items-center px-6  bg-gray-400">
               <div className="flex flex-col">
-                <div>{product.currentBid}</div>
+                <div>₹ {product.currentBid}</div>
                 <div>{product.bidWinner}</div>
               </div>
               <div className=" flex flex-col">

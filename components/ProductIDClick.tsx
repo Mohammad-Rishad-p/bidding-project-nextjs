@@ -108,6 +108,10 @@ const ProductIDClick = () => {
   };
 
   const performBid = async (productID: any, userName: any) => {
+    if (!userName) {
+      alert("Please login to bid.");
+      return;
+    }
     try {
       const uName = { userName };
       const res = await fetch(`/api/products/updateBid/${productID}`, {
@@ -139,13 +143,13 @@ const ProductIDClick = () => {
             {/* image, remaining time, bid button table */}
             <div className='flex gap-[100px]'>
             {/* part 1 image */}
-            <div className='bg-red- w-[500px] h-[550px]'>
+            <div className='bg-red- w-[550px] h-[530px]'>
               {/* image of product */}
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>
             <div className='flex flex-col gap-8'>
               {/* product name */}
-              <p className='text-6xl'>{product.productName}</p>
+              <p className='text-4xl'>{product.productName}</p>
               <div className='flex gap-8'>
                 {/* part 2 bid + remaining time */}
                 <div className='w-[270px] bg-slate-200 p-6 text-2xl items-center justify-center h-[150px] flex'>
