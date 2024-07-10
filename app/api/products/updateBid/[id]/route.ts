@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: any) {
     try {
-        const {userName} = await request.json();
+        const { userName } = await request.json();
         await dbConnect();
         console.log("connected to db in live auction");
         const url = new URL(request.url);

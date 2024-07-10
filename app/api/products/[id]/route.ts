@@ -3,7 +3,7 @@ import Product from "@/models/product";
 import { NextResponse } from "next/server";
 
 export async function GET(request: any) {
-    try{
+    try {
         await dbConnect();
         console.log("connected to db");
         const url = new URL(request.url);

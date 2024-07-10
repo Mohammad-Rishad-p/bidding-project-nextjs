@@ -17,13 +17,13 @@ function Header() {
                 {/* second part in header */}
                 <div className='flex w-[60%] items-center gap-12 justify-start'>
                     {/* Auction Home */}
-                    <ItemInHeader text='Auction Home' link={`/products/getProducts?userName=${encodeURIComponent(userName || '')}`}/>
+                    <ItemInHeader text='Auction Home' link={`/products/getProducts?userName=${encodeURIComponent(userName || '')}`} />
                     {/* How it works */}
-                    <ItemInHeader text='How It Works' link=''/>
+                    <ItemInHeader text='How It Works' link='' />
                     {/* contact us */}
-                    <ItemInHeader text='Contact Us' link=''/>
+                    <ItemInHeader text='Contact Us' link='' />
                     {/* my Account */}
-                    <ItemInHeader text='My Account' link=''/>
+                    <ItemInHeader text='My Account' link='' />
                 </div>
                 {/* third part */}
                 <div className=' rounded-full w-[10%] flex justify-center items-center'>

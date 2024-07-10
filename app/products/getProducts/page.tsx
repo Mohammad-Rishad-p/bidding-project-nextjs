@@ -11,17 +11,15 @@ import React from 'react'
 const page = () => {
   return (
     <div className=' flex flex-col gap-12'>
-        
-        <Header />
-        <div className=' px-[10%]'>
-        {/* <LiveAuctions /> */}
+
+      <Header />
+      <div className=' px-[10%]'>
+
         <LiveAuctionNew />
         <UpcomingAuctions />
         <PastAuctions />
-        </div>
-        <Footer />
-        {/* <ProductCard /> */}
-      
+      </div>
+      <Footer />
     </div>
   )
 }

@@ -10,7 +10,7 @@ export async function POST(request: any) {
         console.log("Connected to DB");
 
         console.log({ firstName, lastName, userName, password, email, phoneNumber, aadhar, pan });
-        
+
         // Check if the username already exists in the database
         const existingUser = await User.findOne({ userName });
         if (existingUser) {

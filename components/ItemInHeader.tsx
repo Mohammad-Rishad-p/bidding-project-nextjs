@@ -10,8 +10,8 @@ type Props = {
 function ItemInHeader({ text, link }: Props) {
     return (
         <div>
-            <Link href={link}>         
-                    <Button variant='secondary'>{text}</Button>   
+            <Link href={link}>
+                <Button variant='secondary'>{text}</Button>
             </Link>
         </div>
     );

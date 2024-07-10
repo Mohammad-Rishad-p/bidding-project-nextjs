@@ -5,7 +5,7 @@ import LoginMongo from './LoginMongo'
 const HeaderInMain = () => {
   return (
     <header className=' w-full'>
-        <div className='bg-[#5a686d] py-3 flex items-center justify-center  '>
+      <div className='bg-[#5a686d] py-3 flex items-center justify-center  '>
         {/* title */}
         <div className='w-[30%]'>
           {/* title */}

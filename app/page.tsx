@@ -14,17 +14,17 @@ export default function Home() {
       {/* header */}
       <HeaderInMain />
       <div className=" w-full">
-      <div className=" w-full h-screen ml-[40%] mt-[4%]">
-      <SignUpMongo />
-      </div>
+        <div className=" w-full h-screen ml-[40%] mt-[4%]">
+          <SignUpMongo />
+        </div>
       </div>
       <div className=' px-[10%]'>
         {/* <LiveAuctions /> */}
         <LiveAuctionNew />
         <UpcomingAuctions />
         <PastAuctions />
-        </div>
-      <Footer /> 
+      </div>
+      <Footer />
     </main>
   );
 }

@@ -8,11 +8,11 @@ import Link from "next/link";
 type Product = {
   _id: string,
   productName: string,
-  imageSrc: string, 
-  descriptionOfImage: string, 
-  auctionType: string, 
-  minimumIncrease: number, 
-  bidResetTime: number, 
+  imageSrc: string,
+  descriptionOfImage: string,
+  auctionType: string,
+  minimumIncrease: number,
+  bidResetTime: number,
   auctionDate: string,
   startingPrice: number,
   productDescription: string,
@@ -27,14 +27,14 @@ const UpcomingAuctions = () => {
     const fetchProducts = async () => {
       const res = await fetch('/api/products/getProducts');
       const products: Product[] = await res.json();
-      
+
       // Filter products to show only upcoming auctions that are not live
       const upcomingProducts = products.filter(product => {
         const auctionDate = new Date(product.auctionDate);
         const currentDate = new Date();
         return auctionDate > currentDate; // Show only products with auction dates in the future
       });
-      
+
       setProducts(upcomingProducts);
     };
 
@@ -45,7 +45,7 @@ const UpcomingAuctions = () => {
   const calculateRemainingTime = (auctionDate: string) => {
     const now = new Date().getTime();
     const auctionStartTime = new Date(auctionDate).getTime();
-    
+
     // Calculate remaining time
     const timeDifference = auctionStartTime - now;
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -56,7 +56,7 @@ const UpcomingAuctions = () => {
     if (days > 0) {
       return `${days} days`;
     }
-    
+
     return `${hours} hours ${minutes} minutes ${seconds} seconds`;
   };
 
@@ -77,7 +77,7 @@ const UpcomingAuctions = () => {
             <div className='h-[80%]'>
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>
-          </div>        
+          </div>
           <Card className='h-[15%] flex items-center justify-center'>
             Starts in {calculateRemainingTime(product.auctionDate)}
           </Card>

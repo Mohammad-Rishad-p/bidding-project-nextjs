@@ -11,15 +11,15 @@ const AddProduct = () => {
   return (
     <main>
       <div className=' flex flex-col gap-12'>
-      <Header />
-      {/* <AddProductForm /> */}
-      <div className=' w-full'>
-        <div className=' mt-[4%] ml-[30%]'>
-        <AddProductMongo />
+        <Header />
+        {/* <AddProductForm /> */}
+        <div className=' w-full'>
+          <div className=' mt-[4%] ml-[30%]'>
+            <AddProductMongo />
+          </div>
         </div>
-      </div>
-      <Footer />
-      {/* <ProductCard /> */}
+        <Footer />
+        {/* <ProductCard /> */}
       </div>
     </main>
   )

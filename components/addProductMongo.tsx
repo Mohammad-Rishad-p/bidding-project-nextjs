@@ -40,21 +40,21 @@ const AddProductMongo = () => {
             alert("Auction date should be at least 2 days from today.");
             return;
         }
-        
+
         if (!productName || !imageSrc || !descriptionOfImage || !auctionType || !startingPrice || !productDescription) {
             alert("Please fill in all fields");
             return;
         }
-        const newProduct = { 
-            productName, 
-            imageSrc, 
-            descriptionOfImage, 
+        const newProduct = {
+            productName,
+            imageSrc,
+            descriptionOfImage,
             auctionType,
-            minimumIncrease: Number(minimumIncrease), 
+            minimumIncrease: Number(minimumIncrease),
             bidResetTime: Number(bidResetTime),
-            startingPrice: Number(startingPrice), 
-            productDescription, 
-            auctionDate, 
+            startingPrice: Number(startingPrice),
+            productDescription,
+            auctionDate,
             delivery,
         };
 

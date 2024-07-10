@@ -8,11 +8,11 @@ import Link from "next/link";
 type Product = {
   _id: string,
   productName: string,
-  imageSrc: string, 
-  descriptionOfImage: string, 
-  auctionType: string, 
-  minimumIncrease: number, 
-  bidResetTime: number, 
+  imageSrc: string,
+  descriptionOfImage: string,
+  auctionType: string,
+  minimumIncrease: number,
+  bidResetTime: number,
   auctionDate: string,
   startingPrice: number,
   productDescription: string,
@@ -55,7 +55,7 @@ const LiveAuctionNew = () => {
   const updateRemainingTimes = (products: Product[]) => {
     const currentDate = new Date();
     const oneDayBeforeCurrent = new Date(currentDate.getTime() - (1000 * 60 * 60 * 24));
-    
+
     const newRemainingTimes = products.reduce((acc, product) => {
       const auctionDate = new Date(product.auctionDate);
       const timeDifference = auctionDate.getTime() - oneDayBeforeCurrent.getTime();
@@ -113,7 +113,7 @@ const LiveAuctionNew = () => {
             <div className='h-[80%]'>
               <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
             </div>
-          </div>        
+          </div>
           <Card className='h-[25%] flex flex-col items-center justify-center'>
             <div className=" flex justify-between w-full items-center px-6  bg-gray-400">
               <div className="flex flex-col">
@@ -127,7 +127,7 @@ const LiveAuctionNew = () => {
             </div>
             <div className=" w-full px-8 py-2">
               <Button variant='destructive' className=" bg-[#f7a040] w-full rounded-sm"
-              onClick={async() => performBid(product._id, userName)}
+                onClick={async () => performBid(product._id, userName)}
               >bid</Button>
             </div>
           </Card>
