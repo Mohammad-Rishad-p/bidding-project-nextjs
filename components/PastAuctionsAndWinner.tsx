@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { Card } from './ui/card';
 import Link from "next/link";
@@ -16,9 +16,10 @@ type Product = {
   productDescription: string,
   bidWinner: string,
   bidStatus: number,
+  currentBid: number
 }
 
-const PastAuctions = () => {
+const PastAuctionsAndWinner = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -33,6 +34,12 @@ const PastAuctions = () => {
           return auctionDate.getTime() < oneDayBefore.getTime();
         });
         setProducts(pastProducts);
+
+        pastProducts.forEach(product => {
+          if (product.bidStatus === 0) {
+            updateWinner(product._id, product.bidWinner, product.currentBid, product.startingPrice, product.productName);
+          }
+        });
       } catch (error) {
         console.error("Failed to fetch past products:", error);
       }
@@ -40,6 +47,28 @@ const PastAuctions = () => {
 
     fetchProducts();
   }, []);
+
+  const updateWinner = async (productId: string, ubidWinner: string, cbid: number, sp: number, productName: string) => {
+    const auctionPrice = await cbid + sp;
+    const winner = {
+        productId,
+        ubidWinner,
+        auctionPrice,
+        productName
+    }
+    try {
+      const res = fetch(`/api/products/updateWinner`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(winner),
+      });
+      console.log(`Winner updated for product ID: ${productId}`);
+    } catch (error) {
+      console.error("Error updating winner:", error);
+    }
+  };
 
   return (
     <div className=" mt-[4%]">
@@ -76,4 +105,4 @@ const PastAuctions = () => {
   );
 };
 
-export default PastAuctions;
+export default PastAuctionsAndWinner;

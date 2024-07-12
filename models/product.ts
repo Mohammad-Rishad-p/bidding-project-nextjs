@@ -14,6 +14,7 @@ export interface IProduct extends Document {
     currentBid: number;
     bidWinner: string;
     delivery: string;
+    bidStatus: number;
 };
 
 const productSchema: Schema = new mongoose.Schema({
@@ -57,13 +58,17 @@ const productSchema: Schema = new mongoose.Schema({
         default: 0,
         required: true
     },
-    bidWinner:{
+    bidWinner: {
         type: String,
         default: " ",
         required: true
     },
-    delivery:{
+    delivery: {
         type: String,
+        required: true
+    }, bidStatus: {
+        type: Number,
+        default: 0,
         required: true
     }
 });

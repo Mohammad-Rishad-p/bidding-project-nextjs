@@ -14,10 +14,10 @@ export default function Home() {
     <main className="w-full h-screen flex flex-col gap-12" >
       {/* header */}
       <HeaderInMain />
-      <UpcomingAuctionsAdmin />
+      {/* <UpcomingAuctionsAdmin /> */}
       <div className=" w-full">
         <div className=" w-full h-screen ml-[40%] mt-[4%]">
-          {/* <SignUpMongo /> */}
+          <SignUpMongo />
         </div>
       </div>
       <div className=' px-[10%]'>

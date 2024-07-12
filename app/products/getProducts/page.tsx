@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import LiveAuctionNew from '@/components/LiveAuctionNew'
 import LiveAuctions from '@/components/LiveAuctions'
 import PastAuctions from '@/components/PastAuctions'
+import PastAuctionsAndWinner from '@/components/PastAuctionsAndWinner'
 import UpcomingAuctions from '@/components/UpcomingAuctions'
 
 // import ProductCard from '@/components/ProductCard'
@@ -17,7 +18,8 @@ const page = () => {
 
         <LiveAuctionNew />
         <UpcomingAuctions />
-        <PastAuctions />
+        <PastAuctionsAndWinner />
+        {/* <PastAuctions /> */}
       </div>
       <Footer />
     </div>

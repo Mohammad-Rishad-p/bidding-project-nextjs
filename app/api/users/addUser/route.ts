@@ -9,7 +9,7 @@ export async function POST(request: any) {
         await dbConnect();
         console.log("Connected to DB");
 
-        console.log({ firstName, lastName, userName, password, email, phoneNumber, aadhar, pan });
+        console.log("user created succesfully", {userName});
 
         // Check if the username already exists in the database
         const existingUser = await User.findOne({ userName });
