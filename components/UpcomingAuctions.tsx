@@ -63,7 +63,7 @@ const UpcomingAuctions = () => {
   // Function to render product cards
   const renderProductCards = (products: Product[]) => {
     if (products.length === 0) {
-      return <p>No products available</p>;
+      return;
     }
 
     return products.map((product) => (
@@ -88,7 +88,9 @@ const UpcomingAuctions = () => {
 
   return (
     <div className=" mt-[4%]">
-      <h1 className=" text-5xl mb-12 items-center justify-center flex">Featured Upcoming Auctions</h1>
+      {products.length > 0 && (
+        <h1 className="text-5xl mb-12 items-center justify-center flex">Featured Upcoming Auctions</h1>
+      )}
       <div className="flex gap-8 m-4 flex-wrap">
         {renderProductCards(products)}
       </div>

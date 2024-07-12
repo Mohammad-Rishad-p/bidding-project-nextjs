@@ -99,7 +99,7 @@ const LiveAuctionNew = () => {
 
   const renderProductCards = () => {
     if (products.length === 0) {
-      return <p>No products available</p>;
+      return;
     }
 
     return products.map((product) => (
@@ -138,7 +138,9 @@ const LiveAuctionNew = () => {
 
   return (
     <div className="mx-[10%] mt-[4%]">
-      <h1 className="text-5xl mb-12 items-center justify-center flex">Live Auctions</h1>
+      {products.length > 0 && (
+        <h1 className="text-5xl mb-12 items-center justify-center flex">Live Auctions</h1>
+      )}
       <div className="flex gap-8 m-4 flex-wrap">
         {renderProductCards()}
       </div>

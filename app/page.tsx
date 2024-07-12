@@ -4,6 +4,7 @@ import HeaderInMain from "@/components/HeaderInMain";
 import LiveAuctionNew from "@/components/LiveAuctionNew";
 import LiveAuctions from "@/components/LiveAuctions";
 import PastAuctions from "@/components/PastAuctions";
+import PastAuctionsAndWinner from "@/components/PastAuctionsAndWinner";
 import SignUpMongo from "@/components/SignUpMongo";
 import UpcomingAuctions from "@/components/UpcomingAuctions";
 import UpcomingAuctionsAdmin from "@/components/UpcomingAuctionsAdmin";
@@ -23,7 +24,7 @@ export default function Home() {
       <div className=' px-[10%]'>
         <LiveAuctionNew />
         <UpcomingAuctions />
-        <PastAuctions />
+        <PastAuctionsAndWinner />
       </div>
       <Footer />
     </main>

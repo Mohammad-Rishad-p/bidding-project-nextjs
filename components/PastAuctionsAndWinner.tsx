@@ -34,12 +34,6 @@ const PastAuctionsAndWinner = () => {
           return auctionDate.getTime() < oneDayBefore.getTime();
         });
         setProducts(pastProducts);
-
-        pastProducts.forEach(product => {
-          if (product.bidStatus === 0) {
-            updateWinner(product._id, product.bidWinner, product.currentBid, product.startingPrice, product.productName);
-          }
-        });
       } catch (error) {
         console.error("Failed to fetch past products:", error);
       }
@@ -48,34 +42,14 @@ const PastAuctionsAndWinner = () => {
     fetchProducts();
   }, []);
 
-  const updateWinner = async (productId: string, ubidWinner: string, cbid: number, sp: number, productName: string) => {
-    const auctionPrice = await cbid + sp;
-    const winner = {
-        productId,
-        ubidWinner,
-        auctionPrice,
-        productName
-    }
-    try {
-      const res = fetch(`/api/products/updateWinner`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(winner),
-      });
-      console.log(`Winner updated for product ID: ${productId}`);
-    } catch (error) {
-      console.error("Error updating winner:", error);
-    }
-  };
-
   return (
     <div className=" mt-[4%]">
-      <h1 className=" text-5xl mb-12 items-center justify-center flex">Closed Auctions</h1>
+      {products.length > 0 && (
+        <h1 className="text-5xl mb-12 items-center justify-center flex">Closed Auctions</h1>
+      )}
       <div className="flex gap-8 m-4 flex-wrap">
         {products.length === 0 ? (
-          <p>No products available</p>
+          <></>
         ) : (
           products.map((product) => (
             <div className='w-[350px] h-[400px] text-[#404d63]' key={product._id}>
