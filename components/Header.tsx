@@ -1,10 +1,16 @@
-import React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import ItemInHeader from './ItemInHeader';
 import { ThemeToggler } from './ThemeToggler';
 
 function Header() {
-    const userName = typeof window !== 'undefined' ? localStorage.getItem('userName') : '';
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        const storedUserName = localStorage.getItem('userName');
+        setUserName(storedUserName || '');
+    }, []);
 
     return (
         <header className=' bg-[#5a686d] py-3 '>
@@ -23,7 +29,8 @@ function Header() {
                     {/* contact us */}
                     <ItemInHeader text='Contact Us' link='' />
                     {/* my Account */}
-                    <ItemInHeader text='My Account' link='' />
+                    <ItemInHeader text={`${userName.length > 1 ? `${userName} - My Account` : `${userName} My Account`}`} link={userName.length > 1 ? '/users/userDetails' : ''} />
+
                 </div>
                 {/* third part */}
                 <div className=' rounded-full w-[10%] flex justify-center items-center'>

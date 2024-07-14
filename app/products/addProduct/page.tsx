@@ -14,7 +14,7 @@ const AddProduct = () => {
         <Header />
         {/* <AddProductForm /> */}
         <div className=' w-full'>
-          <div className=' mt-[4%] ml-[30%]'>
+          <div className=' mt-[4%] ml-[30%] font-serif'>
             <AddProductMongo />
           </div>
         </div>

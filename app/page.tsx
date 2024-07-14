@@ -24,7 +24,8 @@ export default function Home() {
       <div className=' px-[10%]'>
         <LiveAuctionNew />
         <UpcomingAuctions />
-        <PastAuctionsAndWinner />
+        < PastAuctions />
+        {/* <PastAuctionsAndWinner /> */}
       </div>
       <Footer />
     </main>

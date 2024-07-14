@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 
 const page = () => {
   return (
-    <div className=' flex flex-col gap-12'>
+    <div className=' flex flex-col gap-12 font-serif'>
       <Header />
       <ProductIDClick />
       <Footer />

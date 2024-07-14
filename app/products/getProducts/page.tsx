@@ -14,12 +14,12 @@ const page = () => {
     <div className=' flex flex-col gap-12'>
 
       <Header />
-      <div className=' px-[10%]'>
+      <div className=' px-[10%] font-serif'>
 
         <LiveAuctionNew />
         <UpcomingAuctions />
-        <PastAuctionsAndWinner />
-        {/* <PastAuctions /> */}
+        {/* <PastAuctionsAndWinner /> */}
+        <PastAuctions />
       </div>
       <Footer />
     </div>
