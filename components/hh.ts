@@ -29,3 +29,33 @@ export async function POST(request: any) {
         return NextResponse.json({ error: err.message }); // Return error message in response
     }
 }
+
+
+
+
+
+{/* bid winning history */}
+
+<div className=' bg-gray-100 w-[45%] py-4 flex-col gap-12 flex dark:text-black'>
+{/* heading */}
+<div className='flex items-center justify-center font-serif text-3xl '>
+    Bid Winning history
+</div>
+<div className="max-h-96 overflow-y-scroll p-4 border border-gray-300 b-x bg-gray-100">
+    {user.bids.length > 0 ? (
+        user.bids.map((bid, index) => (
+            <div
+                key={index}
+                className="flex justify-between mx-[4%] gap-3 font-serif text-xl px-2 border- border-gray-400 py-1"
+            >
+                <div>{index + 1}</div>
+                <div>{bid.productName}</div>
+                <div>₹{bid.bidPrice}</div>
+            </div>
+        ))
+    ) : (
+        <div className="text-center dark:text-black">No bids yet</div>
+    )}
+</div>
+
+</div>

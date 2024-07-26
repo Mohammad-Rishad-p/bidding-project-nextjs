@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Card } from './ui/card';
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toast styles
 
 type Product = {
   _id: string,
@@ -42,7 +44,7 @@ const LiveAuctionNew = () => {
     const params = new URLSearchParams(window.location.search);
     setUserName(params.get('userName') || "");
     fetchLiveProducts();
-  }, []);
+  }, [products]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -91,6 +93,11 @@ const LiveAuctionNew = () => {
       if (res.ok) {
         // Re-fetch live products to reflect the new bid
         fetchLiveProducts();
+        toast.success('you have successfully bidded', {
+          position: 'top-center',
+          autoClose: 3000, // Close toast after 3 seconds
+          hideProgressBar: true, // Hide progress bar
+      });
       }
     } catch (error: any) {
       alert(`Error: ${error.message}`);
@@ -115,7 +122,7 @@ const LiveAuctionNew = () => {
             </div>
           </div>
           <Card className='h-[25%] flex flex-col items-center justify-center'>
-            <div className=" flex justify-between w-full items-center px-6  bg-gray-400">
+            <div className=" flex justify-between w-full items-center px-6  bg-slate-200">
               <div className="flex flex-col">
                 <div>₹ {product.currentBid}</div>
                 <div>{product.bidWinner}</div>
@@ -129,6 +136,7 @@ const LiveAuctionNew = () => {
               <Button variant='destructive' className=" bg-[#f7a040] w-full rounded-sm"
                 onClick={async () => performBid(product._id, userName)}
               >bid</Button>
+              <ToastContainer />
             </div>
           </Card>
         </Card>

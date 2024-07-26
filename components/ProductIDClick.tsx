@@ -1,6 +1,8 @@
 "use client";
 import { Button } from '@/components/ui/button';
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toast styles
 
 const ProductIDClick = () => {
   type Product = {
@@ -71,8 +73,12 @@ const ProductIDClick = () => {
 
           if (days > 0) {
             setRemainingTime(`${days} days`);
-          } else {
+          } else if (hours > 0) {
             setRemainingTime(`${hours}:${minutes}:${seconds}`);
+          } else if (minutes > 0) {
+            setRemainingTime(`${minutes}:${seconds}`);
+          } else {
+            setRemainingTime(`${seconds}`);
           }
         } else {
           setRemainingTime('Auction ended');
@@ -124,6 +130,11 @@ const ProductIDClick = () => {
       if (res.ok) {
         setUserName(userName);
         await fetchProductDetails(productID); // Fetch updated product details after a successful bid
+        toast.success('you have successfully bidded', {
+          position: 'top-center',
+          autoClose: 3000, // Close toast after 3 seconds
+          hideProgressBar: true, // Hide progress bar
+      });
       }
     } catch (error: any) {
       alert(`Error: ${error.message}`);
@@ -131,8 +142,10 @@ const ProductIDClick = () => {
   };
 
   const isTimeFormat = (time: string) => {
-    const timePattern = /^\d{1,2}:\d{2}:\d{2}$/; // pattern to match 'hh:mm:ss' format
-    return timePattern.test(time);
+    const timePatternHHMMSS = /^\d{1,2}:\d{2}:\d{2}$/; // pattern to match 'hh:mm:ss' format
+    const timePatternMMSS = /^\d{1,2}:\d{2}$/; // pattern to match 'mm:ss' format
+    const timePatternSS = /^\d{1,2}$/; // pattern to match 'ss' format (seconds only)
+    return timePatternHHMMSS.test(time) || timePatternMMSS.test(time) || timePatternSS.test(time);
   };
 
   return (
@@ -143,9 +156,9 @@ const ProductIDClick = () => {
             {/* image, remaining time, bid button table */}
             <div className='flex gap-[100px]'>
             {/* part 1 image */}
-            <div className='bg-red- w-[550px] h-[530px]'>
+            <div className='bg-red- w-[550px] h-[530px] flex items-center justify-center'>
               {/* image of product */}
-              <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-full' />
+              <img src={product.imageSrc} alt={product.descriptionOfImage} className='w-full h-[65%]' />
             </div>
             <div className='flex flex-col gap-8'>
               {/* product name */}
@@ -176,6 +189,7 @@ const ProductIDClick = () => {
                     >
                       Bid
                     </Button>
+                    <ToastContainer />
                   </div>
                 </div>
               </div>
@@ -185,8 +199,8 @@ const ProductIDClick = () => {
                   <table className='w-[500px] '>
                     {/* product/auction Id */}
                     <tr className='flex justify-between border-black border-b-[0.4px] mb-1'>
-                      <td>Auction Id</td>
-                      <td className='mb-1'>{product._id}</td>
+                      <td>delivery</td>
+                      <td className='mb-1'>{product.delivery}</td>
                     </tr>
                     {/* product price */}
                     <tr className='flex justify-between border-black border-b-[0.4px] mb-1'>
@@ -208,17 +222,21 @@ const ProductIDClick = () => {
                       <td>Auction start time</td>
                       <td className='mb-1'>{formatDate(product.auctionDate)}</td>
                     </tr>
+                   
                   </table>
                 </div>
               </div>
             </div>
-            {/* part 4 product details */}
-          </div>
-          {/* product detaliss */}
-          <div className=' w-full mt-16'>
-            <div className=' text-4xl flex items-center justify-center bg-slate-300 border-[0.52px]'>Product Detais</div>
-            <div className=' text-xl flex items-center px-8 bg-slate-200 border-[0.52px]'>{product.productDescription}</div>
-          </div>
+            </div>
+            {/* product description */}
+            <div className='mt-[30px] flex gap-3 flex-col bg-slate-300'>
+              <div className='text-2xl bg-slate-300 items-center justify-center flex'>
+                Product Description
+              </div>
+              <div className='text-lg bg-slate-200'>
+                {product.productDescription}
+              </div>
+            </div>
           </div>
         )}
       </div>
