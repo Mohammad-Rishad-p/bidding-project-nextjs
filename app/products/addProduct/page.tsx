@@ -1,6 +1,6 @@
 
 
-import AddProductForm from '@/components/AddProductForm'
+// import AddProductForm from '@/components/AddProductForm'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import ProductCard from '@/components/ProductCard'
