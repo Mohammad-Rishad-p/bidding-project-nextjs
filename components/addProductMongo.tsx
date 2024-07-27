@@ -106,7 +106,7 @@ const AddProductMongo = () => {
                 </div>
                 {/* image src */}
                 <div className="flex flex-col gap-2 mb-2">
-                    <label>Enter Product's Image Src</label>
+                    <label>Enter Product&apos;s Image Src</label>
                     <input
                         type="text"
                         placeholder="Enter image src"
