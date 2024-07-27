@@ -12,6 +12,7 @@ const Page = () => {
   return (
     <div>
       <HeaderAdmin />
+      <div className='mx-[8%]'>
       <LiveAuctionNew />
       <UpcomingAuctionsAdmin />
       <PastAuctions />
@@ -25,7 +26,7 @@ const Page = () => {
         >
           +
         </Button>
-      </div>
+      </div></div>
     </div>
   );
 }
