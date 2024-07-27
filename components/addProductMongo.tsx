@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from 'react';
 import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
 
 const AddProductMongo = () => {
+    const router = useRouter();
     type Product = {
         _id: string;
         productName: string;
@@ -78,6 +80,7 @@ const AddProductMongo = () => {
             setProductDescription("");
             setAuctionDate("");
             setDelivery("");
+            window.location.href = '/admin'
         } else {
             const errorData = await res.json();
             alert(`Error: ${errorData.error}`);

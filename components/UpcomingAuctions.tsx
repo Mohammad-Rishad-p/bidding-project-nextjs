@@ -88,8 +88,11 @@ const UpcomingAuctions = () => {
 
   return (
     <div className=" mt-[4%]">
-      {products.length > 0 && (
-        <h1 className="text-5xl mb-12 items-center justify-center flex">Featured Upcoming Auctions</h1>
+      {products.length === 0 && (
+        <div>
+          <h1 className="text-5xl mb-12 items-center justify-center flex">Featured Upcoming Auctions</h1>
+          <p className="text-xl"> No Products availble now</p>
+        </div>
       )}
       <div className="flex gap-8 m-4 flex-wrap">
         {renderProductCards(products)}
