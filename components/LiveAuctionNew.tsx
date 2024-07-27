@@ -152,6 +152,11 @@ const LiveAuctionNew = () => {
           <p className="text-xl"> No Products availble now</p>
         </div>
       )}
+      {products.length >=1 && (
+        <div>
+        <h1 className="text-5xl mb-12 items-center justify-center flex">Live Auctions</h1>
+        </div>
+      )}
       <div className="flex gap-8 m-4 flex-wrap">
         {renderProductCards()}
       </div>

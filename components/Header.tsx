@@ -30,7 +30,7 @@ function Header() {
                 {/* first part in header */}
                 <div className='w-[30%]'>
                     {/* title */}
-                    <div className='text-5xl text-white'>
+                    <div className='text-5xl text-white' onClick={() => window.location.href = '/'}>
                         Easy <span className='text-orange-600'>Bidder</span>
                     </div>
                 </div>

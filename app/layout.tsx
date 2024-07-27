@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-white dark:bg-[#1A1C29] font-serif">
+      <body className="bg-white dark:bg-[#1A1C29] font-serif w-screen absolute">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
