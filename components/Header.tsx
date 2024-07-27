@@ -39,9 +39,9 @@ function Header() {
                     {/* Auction Home */}
                     <ItemInHeader text='Auction Home' link={`/products/getProducts?userName=${encodeURIComponent(userName || '')}`} />
                     {/* How it works */}
-                    <ItemInHeader text='How It Works' link='' />
+                    <ItemInHeader text='How It Works' link='/howitworks' />
                     {/* contact us */}
-                    <ItemInHeader text='Contact Us' link='' />
+                    <ItemInHeader text='Contact Us' link='/contactUs' />
                     {/* my Account */}
                     <div className='relative'>
                         <Button onClick={toggleDropdown} className='focus:outline-none'>
