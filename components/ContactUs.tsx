@@ -48,7 +48,7 @@ const ContactUs = () => {
           </div>
           <div className="mb-4 flex items-center">
             <input type="checkbox" name="captcha" className="mr-2" />
-            <label className="text-sm text-gray-600">I'm not a robot</label>
+            <label className="text-sm text-gray-600">I&apos;m not a robot</label>
           </div>
           <button
             type="submit"
