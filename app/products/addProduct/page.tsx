@@ -10,7 +10,7 @@ import React from 'react'
 const AddProduct = () => {
   return (
     <main>
-      <div className=' flex flex-col gap-12'>
+      <div className=' flex flex-col gap-12 '>
         <Header />
         {/* <AddProductForm /> */}
         <div className=' w-full'>
