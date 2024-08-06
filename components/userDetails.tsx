@@ -117,7 +117,7 @@ const UserDetails = () => {
                                             <tr key={index} className='border-b border-gray-400'>
                                                 <td className='p-2'>{index + 1}</td>
                                                 <td className='p-2'>{bid.productName}</td>
-                                                <td className='p-2'>₹{bid.bidPrice}</td>
+                                                <td className='p-2'>₹ {bid.bidPrice}</td>
                                             </tr>
                                         ))
                                     ) : (

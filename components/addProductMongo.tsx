@@ -101,7 +101,7 @@ const AddProductMongo = () => {
                         className="h-10 pl-7 rounded-md"
                         required
                         minLength={4}
-                        maxLength={50}
+                        // maxLength={50}
                     />
                 </div>
                 {/* image src */}

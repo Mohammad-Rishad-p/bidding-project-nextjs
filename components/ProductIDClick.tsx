@@ -214,7 +214,7 @@ const ProductIDClick = () => {
                     </tr>
                     {/* bid reset time */}
                     <tr className='flex justify-between mb-1 border-black border-b-[0.4px] mb-1'>
-                      <td>Bid reset time</td>
+                      <td>Time increase\bid</td>
                       <td className='mb-1'>{product.bidResetTime}</td>
                     </tr>
                     {/* auction start */}

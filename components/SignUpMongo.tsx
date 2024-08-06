@@ -85,7 +85,7 @@ const SignUpMongo = () => {
             <form onSubmit={handleSubmit}>
                 <div className='flex gap-5 items-center justify-center pb-4'>
                     <Input id='firstName' name='firstName' type='text' placeholder='First Name' className='rounded-sm h-10 pl-7 w-60' required minLength={3} onChange={(e) => setFirstName(e.target.value)} value={firstName} />
-                    <Input id='lastName' name='lastName' type='text' placeholder='Last Name' className='rounded-sm h-10 pl-7 w-60' required minLength={3} onChange={(e) => setLastName(e.target.value)} value={lastName} />
+                    <Input id='lastName' name='lastName' type='text' placeholder='Last Name' className='rounded-sm h-10 pl-7 w-60' required minLength={1} onChange={(e) => setLastName(e.target.value)} value={lastName} />
                 </div>
                 <div className='flex gap-5 items-center justify-center pb-4'>
                     <Input id='userName' name='userName' type='text' placeholder='username' className='rounded-sm h-10 pl-7 w-60' required minLength={3} onChange={(e) => setUserName(e.target.value)} value={userName} />
