@@ -44,7 +44,7 @@ const LiveAuctionNew = () => {
     const params = new URLSearchParams(window.location.search);
     setUserName(params.get('userName') || "");
     fetchLiveProducts();
-  }, []);
+  }, [products]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
